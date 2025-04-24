@@ -1,0 +1,103 @@
+/* Add this in your styles.css or inside a <style> tag */
+.modern-footer {
+  background: #111;
+  color: #ddd;
+  padding: 60px 20px 30px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: auto;
+  gap: 40px;
+}
+
+.footer-section {
+  flex: 1 1 250px;
+}
+
+.footer-section h2,
+.footer-section h3 {
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.footer-section p {
+  font-size: 15px;
+  color: #bbb;
+  line-height: 1.6;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section ul li a {
+  color: #aaa;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 10px;
+  transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+  color: #1e90ff;
+}
+
+.subscribe-form {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.subscribe-form input {
+  flex: 1;
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+
+.subscribe-form button {
+  background-color: #1e90ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s ease;
+}
+
+.subscribe-form button:hover {
+  background-color: #187bcd;
+}
+
+.social-icons {
+  margin-top: 15px;
+}
+
+.social-icons a {
+  color: #ccc;
+  margin-right: 12px;
+  font-size: 20px;
+  transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+  color: #1e90ff;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 14px;
+  color: #777;
+}
