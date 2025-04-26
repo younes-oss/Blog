@@ -7,6 +7,6 @@ export const loginGuardGuard: CanActivateFn = (route, state) => {
   if (localStorage.getItem('login') == null) {
     return true;
   } else {
-    router.navigate(['/Dashboard']); // <-- redirect to login
-    return false;
+    return router.parseUrl('/Dashboard');
+
   }};
