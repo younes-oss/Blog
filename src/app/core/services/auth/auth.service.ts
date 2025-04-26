@@ -12,19 +12,24 @@ export class AuthService {
 
   }
 
-  login(email: string, password: string): Observable<void> {
-    const promise = signInWithEmailAndPassword(
+  login(email: string, password: string): boolean {
+   signInWithEmailAndPassword(
       this.firebaseAuth,
       email,
       password
     ).then((success  : any)  => {
 
+      localStorage.setItem('login',"true" );
+
       console.log(`Login successful`+success);
+      return true;
       //
     } ,
       error => {
+
       console.log(error);
       });
-    return from(promise);
+    return false;
+
   }
 }
