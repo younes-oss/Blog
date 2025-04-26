@@ -1,0 +1,15 @@
+
+.comments-area img {
+  object-fit: cover;
+}
+
+.btn-primary {
+  background-color: #1e90ff;
+  border-color: #1e90ff;
+}
+
+.btn-primary:hover,
+.btn-outline-primary:hover {
+  background-color: #187bcd;
+  border-color: #187bcd;
+}

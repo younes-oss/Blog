@@ -1,0 +1,83 @@
+<section class="comments-area py-4 bg-light">
+  <div class="container">
+    <div class="col-md-10 col-lg-8 mx-auto">
+
+      <!-- Leave Comment Form -->
+      <div class="bg-white p-3 shadow-sm rounded mb-4">
+        <h6 class="fw-semibold mb-3">Leave a Comment</h6>
+        <form (ngSubmit)="postComment(commentForm)" #commentForm="ngForm" novalidate>
+          <div class="row g-2">
+
+
+            <!-- Name input -->
+            <div class="col-sm-6">
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                placeholder="Your name"
+                [(ngModel)]="newComment.name"
+                #name="ngModel"
+                name="name"
+                required>
+              <div class="alert alert-danger mt-1 p-1" *ngIf="name.touched && name.invalid">
+                Name is required.
+              </div>
+            </div>
+
+            <!-- Email input -->
+            <div class="col-sm-6">
+              <input
+                type="email"
+                class="form-control form-control-sm"
+                placeholder="Your email"
+                [(ngModel)]="newComment.email"
+                #email="ngModel"
+                name="email"
+                required
+                email>
+              <div class="alert alert-danger mt-1 p-1" *ngIf="email.touched && email.errors">
+                <div *ngIf="email.errors['required']">Email is required.</div>
+                <div *ngIf="email.errors['email']">Invalid email format.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Comment text -->
+          <textarea
+            class="form-control form-control-sm mt-2"
+            placeholder="Your comment"
+            rows="3"
+            [(ngModel)]="newComment.text"
+            #text="ngModel"
+            name="text"
+            required></textarea>
+          <div class="alert alert-danger mt-1 p-1" *ngIf="text.touched && text.invalid">
+            Comment is required.
+          </div>
+
+          <!-- Submit button -->
+          <div class="text-end mt-2">
+            <button type="submit" class="btn btn-sm btn-primary" [disabled]="!commentForm.form.valid">
+              Post Comment
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Comments List -->
+      <div class="bg-white p-3 shadow-sm rounded mb-4">
+        <h6 class="fw-semibold mb-3">Comments <span class="text-muted">({{ comments.length }})</span></h6>
+
+        <!-- Loop through comments -->
+        <div *ngFor="let comment of comments" class="d-flex mb-3">
+          <img src="dist/images/cowner.png" alt="{{ comment.name }}" class="rounded-circle me-2" width="40" height="40">
+          <div>
+            <strong class="d-block">{{ comment.name }}</strong>
+            <small class="text-muted">{{ comment.timestamp | date:'short' }}</small>
+            <p class="small mt-1 mb-0 text-muted">{{ comment.text }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

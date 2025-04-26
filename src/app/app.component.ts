@@ -4,10 +4,11 @@ import {NavbarComponent} from './features/navbar/navbar.component';
 import {LoginComponent} from './features/login/login.component';
 import {HomeComponent} from './features/home/home.component';
 import {FooterComponent} from './footer/footer.component';
+import {CommentComponent} from './comment/comment.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, NavbarComponent, LoginComponent, HomeComponent, FooterComponent],
+  imports: [RouterOutlet, NavbarComponent, LoginComponent, HomeComponent, FooterComponent, CommentComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
