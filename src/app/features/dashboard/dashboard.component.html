@@ -19,8 +19,9 @@
     </div>
 
     <div class="mb-3">
-      <label for="postContent" class="form-label">Content</label>
-      <textarea class="form-control" id="postContent" rows="6" placeholder="Write your post content here..." required></textarea>
+      <label class="form-label">Content</label>
+      <!-- app.component.html -->
+      <ckeditor [editor]="Editor" [config]="config" data="<p>Hello, world!</p>"></ckeditor>
     </div>
 
     <div class="mb-3">
