@@ -1,43 +1,51 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule, NgForm } from '@angular/forms';
-import { DatePipe } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { CommentServiceService } from '../core/services/comment-service.service';
-import { Comment } from './comment.interface';
+import {FormsModule} from '@angular/forms';
+import {DatePipe} from '@angular/common';
+import { CommonModule } from '@angular/common';
+// Ensure this service exists
 
 @Component({
   selector: 'app-comment',
-  standalone: true,
   templateUrl: './comment.component.html',
-  imports: [CommonModule, FormsModule, DatePipe],
+  imports: [
+    FormsModule,
+    DatePipe,
+    CommonModule
+  ],
   styleUrls: ['./comment.component.css']
 })
-export class CommentComponent {
-  newComment: Comment = {
+export class CommentComponent implements OnInit {
+
+  comments: any[] = [];  // To store fetched comments
+  newComment = {
     name: '',
     email: '',
-    text: '',
-    timestamp: new Date()
-  };
-
-  comments: Comment[] = [];
+    text: ''
+  };  // For the new comment form
 
   constructor(private commentService: CommentServiceService) {}
 
-  postComment(form: NgForm) {
-    if (form.valid) {
-      const commentToAdd = { ...this.newComment, timestamp: new Date() };
-      this.commentService.addComment(commentToAdd).then(() => {
-        this.comments.unshift(commentToAdd);
-        this.newComment = {
-          name: '',
-          email: '',
-          text: '',
-          timestamp: new Date()
-        };
-        form.resetForm();
-      }).catch(error => {
-        console.error('Error saving comment:', error);
+  ngOnInit(): void {
+    this.loadComments();  // Fetch comments when component initializes
+  }
+
+  loadComments(): void {
+    this.commentService.getComments().subscribe(comments => {
+      this.comments = comments;
+    });
+  }
+
+  postComment(commentForm: any): void {
+    if (commentForm.valid) {
+      const commentData = {
+        ...this.newComment,
+        timestamp: new Date()  // Add timestamp for new comment
+      };
+      this.commentService.addComment(commentData).subscribe(() => {
+        this.comments.push(commentData);  // Add the new comment to the list
+        this.newComment = { name: '', email: '', text: '' };  // Reset the form fields
+        commentForm.resetForm();  // Reset the form
       });
     }
   }
