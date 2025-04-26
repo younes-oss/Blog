@@ -22,8 +22,6 @@ export class LoginComponent {
   authservice : AuthService=inject(AuthService);
 
   Login() {
-if ( this.authservice.login(this.email, this.password)){
-  this.router.navigateByUrl('/Dashboard');
-}
+ this.authservice.login(this.email, this.password)
   }
 }
