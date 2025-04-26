@@ -1,1 +1,33 @@
-<p>dashboard works!</p>
+<div class="container my-5">
+  <h2 class="mb-4">Add New Post</h2>
+
+  <form>
+    <div class="mb-3">
+      <label for="postTitle" class="form-label">Post Title</label>
+      <input type="text" class="form-control" id="postTitle" placeholder="Enter post title" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="postCategory" class="form-label">Category</label>
+      <select class="form-select" id="postCategory" required>
+        <option selected disabled>Choose a category</option>
+        <option>Technology</option>
+        <option>Travel</option>
+        <option>Food</option>
+        <option>Business</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="postContent" class="form-label">Content</label>
+      <textarea class="form-control" id="postContent" rows="6" placeholder="Write your post content here..." required></textarea>
+    </div>
+
+    <div class="mb-3">
+      <label for="postImage" class="form-label">Featured Image</label>
+      <input class="form-control" type="file" id="postImage">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Publish Post</button>
+  </form>
+</div>
