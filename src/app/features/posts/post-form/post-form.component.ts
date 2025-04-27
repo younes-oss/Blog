@@ -1,7 +1,9 @@
-import {Component, ViewEncapsulation} from '@angular/core';
+import {Component, inject, ViewEncapsulation} from '@angular/core';
 import {CKEditorModule} from '@ckeditor/ckeditor5-angular';
 import {Bold, ClassicEditor, Essentials, Italic, Paragraph} from 'ckeditor5';
 import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
+import {PostService} from '../../../core/services/posts/post.service';
+import {Post} from '../../../models/post';
 
 @Component({
   selector: 'app-post-form',
@@ -16,6 +18,9 @@ import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule} from '@angular
 export class PostFormComponent {
 
   post: FormGroup;
+  posts : [] =[];
+
+  postServices = inject(PostService);
 
   public Editor = ClassicEditor;
   public config = {
@@ -30,6 +35,20 @@ export class PostFormComponent {
       title: '',
       content: '',
       image : '',
+      category: ''
     });
   }
+
+  onSubmit(): void {
+    const postlist: Post = {
+      title : this.post.get('title')?.value,
+      content : this.post.get('content')?.value,
+      image : this.post.get('image')?.value,
+      category: this.post.get('category')?.value,
+    }
+this.postServices.addPost(postlist)
+
+  }
+
+
 }

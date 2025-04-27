@@ -9,7 +9,7 @@
 
     <div class="mb-3">
       <label for="postCategory" class="form-label">Category</label>
-      <select  class="form-select" id="postCategory" required>
+      <select formControlName="category"  class="form-select" id="postCategory" required>
         <option selected disabled>Choose a category</option>
         <option>Technology</option>
         <option>Travel</option>
@@ -28,6 +28,6 @@
       <input formControlName="image" class="form-control" type="file" id="postImage">
     </div>
 
-    <button type="submit" class="btn btn-primary">Publish Post</button>
+    <button type="submit" class="btn btn-primary" (click)="onSubmit()">Publish Post</button>
   </form>
 </div>
