@@ -4,7 +4,7 @@ import { routes } from './app.routes';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import {getFirestore, provideFirestore} from '@angular/fire/firestore';
-import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
+
 
 
 const firebaseConfig = {
@@ -24,17 +24,6 @@ export const appConfig: ApplicationConfig = {
     provideFirebaseApp(() => initializeApp(firebaseConfig)),
     provideAuth(() => getAuth()) ,
     provideFirestore(() => getFirestore()),
-    provideAnimationsAsync(),
-    providePrimeNG({
-      theme: {
-        preset: aura,
-        options: {
-          prefix: 'p',
-          darkModeSelector: 'system',
-          cssLayer: false
-        }
-      }
-    })
 
   ]
 };
