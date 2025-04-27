@@ -5,6 +5,7 @@ import {LoginComponent} from './features/login/login.component';
 import {HomeComponent} from './features/home/home.component';
 import { PostDetailComponent } from './features/posts/post-detail/post-detail.component';
 import {FooterComponent} from './footer/footer.component';
+import {CommentComponent} from './comment/comment.component';
 
 @Component({
   selector: 'app-root',
