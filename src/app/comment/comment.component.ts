@@ -1,33 +1,30 @@
 import { Component, OnInit } from '@angular/core';
 import { CommentServiceService } from '../core/services/comment-service.service';
-import {FormsModule} from '@angular/forms';
-import {DatePipe} from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { DatePipe } from '@angular/common';
 import { CommonModule } from '@angular/common';
-// Ensure this service exists
+import { Comment } from './comment.interface'; // تأكد من المسار الصحيح!
 
 @Component({
   selector: 'app-comment',
   templateUrl: './comment.component.html',
+  standalone: true,
   imports: [
     FormsModule,
+    CommonModule,
     DatePipe,
-    CommonModule
   ],
   styleUrls: ['./comment.component.css']
 })
 export class CommentComponent implements OnInit {
 
-  comments: any[] = [];  // To store fetched comments
-  newComment = {
-    name: '',
-    email: '',
-    text: ''
-  };  // For the new comment form
+  comments: Comment[] = [];  // Type-safe array
+  newComment: Partial<Comment> = { name: '', email: '', text: '' }; // Use Partial for optional timestamp
 
   constructor(private commentService: CommentServiceService) {}
 
   ngOnInit(): void {
-    this.loadComments();  // Fetch comments when component initializes
+    this.loadComments();
   }
 
   loadComments(): void {
@@ -38,14 +35,19 @@ export class CommentComponent implements OnInit {
 
   postComment(commentForm: any): void {
     if (commentForm.valid) {
-      const commentData = {
-        ...this.newComment,
-        timestamp: new Date()  // Add timestamp for new comment
+      const commentData: Comment = {
+        name: this.newComment.name || '',
+        email: this.newComment.email || '',
+        text: this.newComment.text || '',
+        timestamp: new Date()
       };
-      this.commentService.addComment(commentData).subscribe(() => {
-        this.comments.push(commentData);  // Add the new comment to the list
-        this.newComment = { name: '', email: '', text: '' };  // Reset the form fields
-        commentForm.resetForm();  // Reset the form
+
+      this.commentService.addComment(commentData).then(() => {
+        this.comments.push(commentData);
+        this.newComment = { name: '', email: '', text: '' };
+        commentForm.resetForm();
+      }).catch(error => {
+        console.error('Error adding comment:', error);
       });
     }
   }

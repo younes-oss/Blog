@@ -1,21 +1,26 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Observable, from } from 'rxjs';  // Import 'from' from rxjs
+import { collectionData, collection, addDoc, Firestore } from '@angular/fire/firestore';
+import { Comment } from '../../comment/comment.interface';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommentServiceService {
 
-  constructor(private firestore: AngularFirestore) {}
+  constructor(private firestore: Firestore) {}
 
-  // Fetch comments from Firestore
-  getComments(): Observable<any[]> {
-    return this.firestore.collection('comments').valueChanges();
+  // Get comments from Firestore
+  getComments(): Observable<Comment[]> {
+    const commentsRef = collection(this.firestore, 'comments');
+    return collectionData(commentsRef, { idField: 'id' }) as Observable<Comment[]>;
   }
 
-  // Add a new comment to Firestore and convert the promise to an observable
-  addComment(commentData: any): Observable<any> {
-    return from(this.firestore.collection('comments').add(commentData));  // Convert Promise to Observable
+  // Add a new comment
+  addComment(comment: Comment): Promise<void> {
+    const commentsRef = collection(this.firestore, 'comments');
+    return addDoc(commentsRef, comment).then(() => {
+      console.log('Comment added successfully');
+    });
   }
 }
