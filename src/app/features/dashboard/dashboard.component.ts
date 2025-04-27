@@ -1,23 +1,28 @@
 import {Component, ViewEncapsulation} from '@angular/core';
 import {CKEditorModule} from '@ckeditor/ckeditor5-angular';
-import {Bold, ClassicEditor, Essentials, Italic, Paragraph} from 'ckeditor5';
-import {FormatPainter} from 'ckeditor5-premium-features';
+import {PostFormComponent} from '../posts/post-form/post-form.component';
+import {ToastComponent} from '../../shared/toast/toast.component';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [CKEditorModule ],
+  imports: [CKEditorModule, PostFormComponent, ToastComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
-  encapsulation: ViewEncapsulation.None,
 
 })
 export class DashboardComponent {
+  message: string="post addedd with succes fully ";
+  show: string ="";
+  color: string="green";
 
-  public Editor = ClassicEditor;
-  public config = {
-    licenseKey: 'eyJhbGciOiJFUzI1NiJ9.eyJleHAiOjE3NDY5MjE1OTksImp0aSI6ImNjNTE0MDg5LTBhOTYtNDdmOC04NmI5LWJkZDY2YWU3ZGUxNSIsInVzYWdlRW5kcG9pbnQiOiJodHRwczovL3Byb3h5LWV2ZW50LmNrZWRpdG9yLmNvbSIsImRpc3RyaWJ1dGlvbkNoYW5uZWwiOlsiY2xvdWQiLCJkcnVwYWwiLCJzaCJdLCJ3aGl0ZUxhYmVsIjp0cnVlLCJsaWNlbnNlVHlwZSI6InRyaWFsIiwiZmVhdHVyZXMiOlsiKiJdLCJ2YyI6IjMyOWVjYTY0In0.dNI3dcjiY5IvG0PZetWz_Ur2wFQ4_Di97zovo1_F47PBKdYFCuJdaaISpI7PcfqsM_jmF1zvR-aCRAHYU3Y_1g', // Or 'GPL'.
-    plugins: [ Essentials, Paragraph, Bold, Italic ],
-    toolbar: [ 'undo', 'redo', '|', 'bold', 'italic', '|']
+
+  showSnackbar() {
+    this.show = "block"; // Display the snackbar
+
+    // After 3 seconds, hide the snackbar
+    setTimeout(() => {
+      this.show = "none";
+    }, 3000);
   }
 
 }
